@@ -1,0 +1,4 @@
+venv/
+data/
+DjangoAuth/__pycache__/
+.env
