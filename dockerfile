@@ -2,7 +2,7 @@
 FROM python:3.12.1-slim
 
 #Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 
 #Set the working directory

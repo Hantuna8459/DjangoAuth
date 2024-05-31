@@ -1,4 +1,7 @@
 venv/
 data/
 DjangoAuth/__pycache__/
+account/__pycache__/
+account/migrations/__pycache__/
 .env
+.vscode/
