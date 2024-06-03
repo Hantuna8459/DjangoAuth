@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +93,19 @@ DATABASES = {
     }
 }
 
+def email_verified_callback(user):
+    user.is_active = True
+
+def password_change_callback(user, password):
+    user.set_password(password)
+    
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv('MAIL_HOST')
+EMAIL_PORT = os.getenv('MAIL_PORT')
+EMAIL_HOST_USER = os.getenv('MAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('MAIL_PASSWORD')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -145,3 +160,5 @@ DATE_INPUT_FORMATS = [
 DATETIME_INPUT_FORMATS = [
     "%d/%m/%Y %H:%M:%S",
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

@@ -12,6 +12,25 @@ class CustomRegisterForm(UserCreationForm):
             'password1',
             'password2',
         ]
+        
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords do not match.')
+        return cd['password2']
+    
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Username already exists")
+        return username
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email already exists")
+        return email
+    
     def __init__(self, *args, **kwargs):
         super(CustomRegisterForm, self).__init__(*args, **kwargs)
     
