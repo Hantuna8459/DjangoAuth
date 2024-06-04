@@ -1,29 +1,39 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:16
+    volumes:
+      - ./data/db:/var/lib/DATABASEql/data
+    ports:
+      - 5432:5432
+    networks:
+      - django_network
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
   web:
+    depends_on:
+      - db
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
       - "8000:8000"
+    networks:
+      - django_network
     env_file:
       - .env
-    restart: always
     environment:
       - DATABASE_NAME=${DB_NAME}
       - DATABASE_USER=${DB_USER}
       - DATABASE_PASSWORD=${DB_PASSWORD}
-      - DATABASE_HOST=$(DB_HOST)
-    depends_on:
-      - db
+      - DATABASE_HOST=db
 
-  db:
-    image: postgres:16
-    volumes:
-      - ./data/db:/var/lib/DATABASEql/data
-    environment:
-      - DATABASE_NAME=${DB_NAME}
-      - DATABASE_USER=${DB_USER}
-      - DATABASE_PASSWORD=${DB_PASSWORD}
+networks:
+  django_network:
+    driver: bridge
