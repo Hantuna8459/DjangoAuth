@@ -5,3 +5,4 @@ account/__pycache__/
 account/migrations/__pycache__/
 .env
 .vscode/
+staticfiles/
