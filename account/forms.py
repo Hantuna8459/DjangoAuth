@@ -27,26 +27,7 @@ class CustomRegisterForm(UserCreationForm):
             'placeholder':'Enter your Email Address'
             }
         )
-    )
-    # password1 = forms.Field(
-    #     label="Password", 
-    #     widget=forms.PasswordInput(attrs={
-    #         'class':'form-control', 
-    #         'placeholder':'',
-    #         'help_text':'<li>Your password must contain at least 8 characters.</li>',
-    #         }
-    #     )
-    # )
-    # password2 = forms.Field(
-    #     label="Password", 
-    #     widget=forms.PasswordInput(attrs={
-    #         'class':'form-control', 
-    #         'placeholder':'',
-    #         'help_text':'<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>',
-    #         }
-    #     )
-    # )
-    
+    )    
     class Meta:
         model = User
         fields = [
